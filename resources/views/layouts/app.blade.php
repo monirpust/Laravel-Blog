@@ -28,10 +28,13 @@
                     @guest
                         <a class="no-underline hover:underline" href="/">Home</a>
                         <a class="no-underline hover:underline" href="/blog">Blog</a>
+                        <a class="no-underline hover:underline" href="/login">Login</a>
                         @if (Route::has('register'))
                             <a class="no-underline hover:underline" href="{{ route('register') }}">{{ __('Register') }}</a>
                         @endif
                     @else
+                    <a class="no-underline hover:underline" href="/">Home</a>
+                    <a class="no-underline hover:underline" href="/blog">Blog</a>
                         <span>{{ Auth::user()->name }}</span>
 
                         <a href="{{ route('logout') }}"

@@ -16,6 +16,8 @@ use App\Http\Controllers\PostsController;
 
 Route::get('/', [PagesController::Class, 'index'])->name('home');
 Route::get('/blog', [PostsController::Class, 'index'])->name('blog');
+Route::get('/blog/create', [PostsController::Class, 'create'])->name('create');
+Route::post('/blog', [PostsController::class, 'store'])->name('store');
 Auth::routes();
 
 Route::get('/home', [\App\Http\Controllers\HomeController::class, 'index'])->name('home');
