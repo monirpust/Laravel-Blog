@@ -7,7 +7,7 @@
                     Do you want to be a Laravel Developer?
                 </h1>
                 <a 
-                href="/blog"
+                href="/blog/slug"
                 class="text-center bg-gray-50 text-gray-700 py-2 px-4
                 font-bold text-xl uppercase"
                 >
