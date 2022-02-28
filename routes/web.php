@@ -18,7 +18,9 @@ Route::get('/', [PagesController::Class, 'index'])->name('home');
 Route::get('/blog', [PostsController::Class, 'index'])->name('blog');
 Route::get('/blog/create', [PostsController::Class, 'create'])->name('create');
 Route::get('/blog/{slug}', [PostsController::class, 'show'])->name('show');
+Route::get('/blog/{slug}/edit', [PostsController::class, 'edit'])->name('edit');
 Route::post('/blog', [PostsController::class, 'store'])->name('store');
+Route::put('/blog/{slug}', [PostsController::class, 'update'])->name('update');
 Auth::routes();
 
 Route::get('/home', [\App\Http\Controllers\HomeController::class, 'index'])->name('home');

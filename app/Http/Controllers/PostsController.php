@@ -80,24 +80,49 @@ class PostsController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int  $slug
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($slug)
     {
-        //
+        $post = Post::where('slug', $slug)->first();
+        return view('blog.edit', [
+            'post' => $post
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  string  $slug
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $slug)
     {
-        //
+        $request->validate([
+            'title' => 'required',
+            'description' => 'required',
+            'image' => 'required|mimes:jpg,jpeg,png|max:5048',
+        ]);
+
+        $newImageName = uniqid() . '-' . $request->title . '.' . $request->image->extension();
+
+        $request->image->move(public_path('images'), $newImageName);
+
+        $newslug = SlugService::createSlug(Post::class, 'slug', $request->title);
+
+        Post::where('slug', $slug)
+                ->update([
+                    'title' => $request->title,
+                    'description' => $request->description,
+                    'slug' => $newslug,
+                    'image_path' => $newImageName,
+                    'user_id' => auth()->user()->id,
+                ]);
+            
+                return redirect('/blog')
+                                ->with('message', 'Your post has been updated successfully!');
     }
 
     /**
