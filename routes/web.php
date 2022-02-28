@@ -21,6 +21,7 @@ Route::get('/blog/{slug}', [PostsController::class, 'show'])->name('show');
 Route::get('/blog/{slug}/edit', [PostsController::class, 'edit'])->name('edit');
 Route::post('/blog', [PostsController::class, 'store'])->name('store');
 Route::put('/blog/{slug}', [PostsController::class, 'update'])->name('update');
+Route::delete('/blog/{slug}', [PostsController::class, 'destroy'])->name('destroy');
 Auth::routes();
 
 Route::get('/home', [\App\Http\Controllers\HomeController::class, 'index'])->name('home');
